@@ -1,0 +1,6 @@
+target
+.idea
+vendor
+bin
+cmake-build-debug
+model
