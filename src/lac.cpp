@@ -13,6 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License. */
 
 #include <iostream>
+#include <string.h>
 #include "lac.h"
 #include "lac_util.h"
 #include "lac_custom.h"
