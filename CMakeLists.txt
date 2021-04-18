@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.19)
 project(lacffi C CXX)
 
-set(CMAKE_C_STANDARD 11)
+# set(CMAKE_C_STANDARD 11)
 
 message(STATUS "C compiler: ${CMAKE_C_COMPILER}, version: "
         "${CMAKE_C_COMPILER_ID} ${CMAKE_C_COMPILER_VERSION}")
@@ -25,6 +25,7 @@ endif("${isSystemDir}" STREQUAL "-1")
 message(STATUS "cmake_install_rpath ${CMAKE_INSTALL_RPATH}")
 
 set(CMAKE_CXX_FLAGS "-O3 -g -pipe -W -Wall -Wno-unused-parameter -fPIC -fpermissive -std=gnu++11")
+message(STATUS "CXX ${CMAKE_CXX_FLAGS}")
 if(NOT DEFINED PADDLE_C_ROOT)
     message(FATAL_ERROR "please set PADDLE_C_ROOT with -DPADDLE_C_ROOT=/path/paddle/lib")
 endif()
