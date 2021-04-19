@@ -2,5 +2,5 @@ target
 .idea
 vendor
 bin
-cmake-build-debug
+cmake-build-*
 model
