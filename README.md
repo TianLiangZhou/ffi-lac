@@ -1,7 +1,7 @@
 ## ffi-lac
 
 `ffi-lac`是一个PHP高性能智能中文分词库，基于百度开源的[lac](https://github.com/baidu/lac) 项目，使用`C++`导出`C`函数构建动态链接库来给`php`调用。
-项目中大部分源码都可以从(https://github.com/baidu/lac)找到。
+项目中大部分源码都可以从 https://github.com/baidu/lac 找到。
 
 ### 环境
 
