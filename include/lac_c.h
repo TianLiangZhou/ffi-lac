@@ -16,6 +16,7 @@ typedef void * CLac;
 typedef struct {
   const char *words;
   const char *tags;
+  const char *weight;
 } LacResult;
 
 extern CLac new_lac(const char *mode);

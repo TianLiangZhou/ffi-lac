@@ -55,13 +55,12 @@ RVAL load_word2id_dict(const std::string &filepath,
     {
         return _FAILD;
     }
-
-    std::string line = "";
+    std::string line;
     std::vector<std::string> tokens;
     while (std::getline(infile, line) && infile.good())
     {
         split_tokens(line, "\t", tokens);
-        if ("" == line || 2 != tokens.size())
+        if (line.empty() || 2 != tokens.size())
         {
             continue;
         }
@@ -84,12 +83,12 @@ RVAL load_q2b_dict(const std::string &filepath,
         return _FAILD;
     }
 
-    std::string line = "";
+    std::string line;
     std::vector<std::string> tokens;
     while (std::getline(infile, line) && infile.good())
     {
         split_tokens(line, "\t", tokens);
-        if ("" == line || 2 != tokens.size())
+        if (line.empty() || 2 != tokens.size())
         {
             continue;
         }
@@ -110,12 +109,12 @@ RVAL load_id2label_dict(const std::string &filepath,
         return _FAILD;
     }
 
-    std::string line = "";
+    std::string line;
     std::vector<std::string> tokens;
     while (std::getline(infile, line) && infile.good())
     {
         split_tokens(line, "\t", tokens);
-        if ("" == line || 2 != tokens.size())
+        if (line.empty() || 2 != tokens.size())
         {
             continue;
         }
@@ -130,7 +129,7 @@ RVAL load_id2label_dict(const std::string &filepath,
 /* 获取下一个gb18030字符的长度 */
 int get_next_gb18030(const char *str)
 {
-    unsigned char *str_in = (unsigned char *)str;
+    auto *str_in = (unsigned char *)str;
     if (str_in[0] < 0x80)
     {
         return 1;
@@ -153,7 +152,7 @@ int get_next_gb18030(const char *str)
 /* 获取下一个UTF8字符的长度 */
 int get_next_utf8(const char *str)
 {
-    unsigned char *str_in = (unsigned char *)str;
+    auto *str_in = (unsigned char *)str;
     if (str_in[0] < 0x80)
     {
         return 1;
@@ -201,7 +200,7 @@ RVAL split_words(const char *input, int len, CODE_TYPE codetype, std::vector<std
 {
     words.clear();
     char *p = (char *)input;
-    int temp_len = 0;
+    int temp_len;
     std::string key;
     for (int i = 0; i < len; i += temp_len)
     {

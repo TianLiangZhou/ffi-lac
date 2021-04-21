@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.0)
 project(lacffi C CXX)
 
 option(WITH_STATIC_LIB "Compile demo with static/shared library, default use static."  OFF)
@@ -115,8 +115,13 @@ add_executable(lac_demo main.c)
 set_target_properties(lac_demo PROPERTIES INSTALL_RPATH_USE_LINK_PATH TRUE)
 target_link_libraries(lac_demo lacffi ${DEPS})
 
+add_executable(lac_cpp_demo main.cpp)
+set_target_properties(lac_cpp_demo PROPERTIES INSTALL_RPATH_USE_LINK_PATH TRUE)
+target_link_libraries(lac_cpp_demo lacffi ${DEPS})
 
 
 install(TARGETS lacffi DESTINATION ${PROJECT_SOURCE_DIR}/lib)
 
 install(TARGETS lac_demo DESTINATION ${PROJECT_SOURCE_DIR}/bin)
+
+install(TARGETS lac_cpp_demo DESTINATION ${PROJECT_SOURCE_DIR}/bin)

@@ -4,3 +4,7 @@ vendor
 bin
 cmake-build-*
 model
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
+build

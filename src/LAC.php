@@ -57,12 +57,12 @@ class LAC
      * 简体转繁体
      *
      * @param string $str
-     * @return array
+     * @return array ['words' => '', 'tags' => '', 'weight' = > '']
      */
     public function parse(string $str): array
     {
         if (empty($str)) {
-            return ['words' => '', 'tags' => ''];
+            return ['words' => '', 'tags' => '', 'weight' => ''];
         }
         $struct = $this->ffi->parse($str, $this->lac);
         return $this->convert($struct);
@@ -99,6 +99,7 @@ class LAC
         $result = [
             'words' => FFI::string($CData->words),
             'tags'  => FFI::string($CData->tags),
+            'weight' => FFI::string($CData->weight),
         ];
         $this->ffi->free_result($CData);
          return $result;
@@ -128,6 +129,7 @@ class LAC
             $suffix = 'dylib';
         }
         $filepath = __DIR__ . '/../lib/liblacffi.' . $suffix;
+        return $filepath;
         if (file_exists($filepath)) {
             return realpath($filepath);
         }

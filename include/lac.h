@@ -34,6 +34,8 @@ struct OutputItem
 {
     std::string word;   // 分词结果
     std::string tag;    // 单词类型
+    int64_t weight; // 权重
+    std::string ftag;
 };
 
 
@@ -47,7 +49,7 @@ class LAC
 {
 public:
     /* 初始化：装载模型和词典 */
-    __attribute__((unused)) LAC(const std::string& model_path, CODE_TYPE type = CODE_UTF8);
+    LAC(const std::string& model_path, CODE_TYPE type = CODE_UTF8);
 
     /* 调用程序 */
     std::vector<OutputItem> run(const std::string &query);                           // 单个query
@@ -92,6 +94,12 @@ private:
 
     // 人工干预词典
     std::shared_ptr<Customization> custom;
+    // 是不是 rank 类型
+    bool _is_rank;
+    // 模型父目录
+    std::string _model_parent;
+
+    unsigned long _words_length;
 };
 #endif  // LAC_CLASS
 
