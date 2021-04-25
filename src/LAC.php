@@ -72,7 +72,7 @@ class LAC
      * @param string|null $dictPath
      * @return static
      */
-    public static function new(string $dictPath = null): static
+    public static function new(string $dictPath = null): LAC
     {
         if (self::$cc == null) {
             self::$cc = new static($dictPath);
@@ -129,7 +129,6 @@ class LAC
             $suffix = 'dylib';
         }
         $filepath = __DIR__ . '/../lib/liblacffi.' . $suffix;
-        return $filepath;
         if (file_exists($filepath)) {
             return realpath($filepath);
         }

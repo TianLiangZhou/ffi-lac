@@ -1,6 +1,6 @@
 {
     "name": "meshell/ffi-lac",
-    "description": "Quickly convert Chinese (simplified) to chinese (traditional)",
+    "description": "The LAC Chinese Word Segmentation Implemented in PHP",
     "type": "library",
     "license": "MIT",
     "authors": [

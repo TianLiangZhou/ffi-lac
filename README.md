@@ -73,3 +73,6 @@ array(2) {
 | 1    | query中限定较弱的词   |  r, c, u ...     | 
 | 2    | query中强限定的词     |  n, s, v ...     | 
 | 3    | query中的核心词       |  nz, nw, LOC ... | 
+
+
+[在线转换](http://loocode.com/tool/lac/chinese-word-segmentation)
