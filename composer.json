@@ -11,12 +11,12 @@
     ],
     "minimum-stability": "stable",
     "require": {
-      "php": ">=7.4",
-      "ext-ffi": "*"
+        "php": "^7.4",
+        "ext-ffi": "*"
     },
     "autoload": {
-      "psr-4": {
-        "FastFFI\\LAC\\": "src/"
-      }
+        "psr-4": {
+            "FastFFI\\LAC\\": "src/"
+        }
     }
 }
