@@ -109,7 +109,7 @@ message(STATUS "'${PROJECT_SOURCE_DIR}' output dir")
 
 add_library(lacffi SHARED ${SOURCE})
 target_link_libraries(lacffi ${DEPS})
-set_target_properties(lacffi PROPERTIES INSTALL_RPATH_USE_LINK_PATH TRUE)
+#set_target_properties(lacffi)
 
 add_executable(lac_demo main.c)
 set_target_properties(lac_demo PROPERTIES INSTALL_RPATH_USE_LINK_PATH TRUE)
