@@ -13,12 +13,10 @@ message(STATUS "CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}")
 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 
 # 确保链接库不在系统默认安装的目录上时更改到项目lib上
-if (APPLE)
-    list(FIND CMAKE_PLATFORM_IMPLICIT_LINK_DIRECTORIES ${CMAKE_INSTALL_RPATH} isSystemDir)
-    if("${isSystemDir}" STREQUAL "-1")
-        set(CMAKE_INSTALL_RPATH "${INSTALL_LIB_DIR}")
-    endif("${isSystemDir}" STREQUAL "-1")
-endif ()
+list(FIND CMAKE_PLATFORM_IMPLICIT_LINK_DIRECTORIES ${CMAKE_INSTALL_RPATH} isSystemDir)
+if("${isSystemDir}" STREQUAL "-1")
+    set(CMAKE_INSTALL_RPATH "${INSTALL_LIB_DIR}")
+endif("${isSystemDir}" STREQUAL "-1")
 message(STATUS "cmake_install_rpath ${CMAKE_INSTALL_RPATH}")
 
 set(CMAKE_CXX_FLAGS "-O3 -g -pipe -W -Wall -Wno-unused-parameter -fPIC -fpermissive -std=gnu++11")
@@ -110,9 +108,7 @@ message(STATUS "'${PROJECT_SOURCE_DIR}' output dir")
 
 add_library(lacffi SHARED ${SOURCE})
 target_link_libraries(lacffi ${DEPS})
-if (APPLE)
-    set_target_properties(lacffi  PROPERTIES INSTALL_RPATH_USE_LINK_PATH TRUE)
-endif ()
+set_target_properties(lacffi  PROPERTIES INSTALL_RPATH_USE_LINK_PATH TRUE)
 
 add_executable(lac_demo main.c)
 set_target_properties(lac_demo PROPERTIES INSTALL_RPATH_USE_LINK_PATH TRUE)
