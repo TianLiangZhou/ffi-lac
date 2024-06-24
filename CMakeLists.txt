@@ -77,6 +77,30 @@ else ()
     message(STATUS "MKLML lib not found.")
 endif()
 
+set (onnx_inc_path ${PADDLE_ABS_PATH}/third_party/install/paddle2onnx/include)
+set (onnx_lib_path ${PADDLE_ABS_PATH}/third_party/install/paddle2onnx/lib)
+set (onnxrutime_inc_path ${PADDLE_ABS_PATH}/third_party/install/onnxruntime/include)
+set (onnxrutime_lib_path ${PADDLE_ABS_PATH}/third_party/install/onnxruntime/lib)
+if (EXISTS ${onnx_inc_path} AND EXISTS ${onnx_lib_path})
+    message(STATUS "paddle2onnx lib found.")
+    include_directories(${onnx_inc_path})
+    if(WIN32)
+        set(ONNX_LIB ${onnx_lib_path}/paddle2onnx.lib)
+    else()
+        set(ONNX_LIB ${onnx_lib_path}/libpaddle2onnx.so.1.0.0rc2)
+    endif()
+
+    include_directories(${onnxrutime_inc_path})
+    if(WIN32)
+        set(ONNXRUTIME_LIB ${onnxrutime_lib_path}/onnxruntime.lib)
+    else()
+        set(ONNXRUTIME_LIB ${onnxrutime_lib_path}/libonnxruntime.so.1.11.1)
+    endif ()
+else ()
+    message(STATUS "paddle2onnx lib not found.")
+endif()
+
+
 if(WITH_STATIC_LIB)
     set(DEPS ${PADDLE_ABS_PATH}/paddle/lib/libpaddle_inference${CMAKE_STATIC_LIBRARY_SUFFIX})
 else()
@@ -90,12 +114,12 @@ endif()
 if (NOT WIN32)
     set(EXTERNAL_LIB "-ldl -lpthread")
     set(DEPS ${DEPS}
-            ${MATH_LIB} ${MKLDNN_LIB}
+            ${MATH_LIB} ${MKLDNN_LIB} ${ONNX_LIB} ${ONNXRUTIME_LIB}
             glog gflags protobuf xxhash
             ${EXTERNAL_LIB})
 else()
     set(DEPS ${DEPS}
-            ${MATH_LIB} ${MKLDNN_LIB}
+            ${MATH_LIB} ${MKLDNN_LIB} ${ONNX_LIB} ${ONNXRUTIME_LIB}
             glog gflags_static libprotobuf  xxhash ${EXTERNAL_LIB})
     set(DEPS ${DEPS} libcmt shlwapi.lib)
 endif(NOT WIN32)
@@ -106,7 +130,8 @@ include_directories(include)
 aux_source_directory(src SOURCE)
 message(STATUS "'${PROJECT_SOURCE_DIR}' output dir")
 
-add_library(lacffi SHARED ${SOURCE})
+add_library(lacffi SHARED ${SOURCE}
+        lib/liblacffi.h)
 target_link_libraries(lacffi ${DEPS})
 set_target_properties(lacffi  PROPERTIES INSTALL_RPATH_USE_LINK_PATH TRUE)
 
